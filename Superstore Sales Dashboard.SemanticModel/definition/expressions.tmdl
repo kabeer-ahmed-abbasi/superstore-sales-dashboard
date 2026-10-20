@@ -1,0 +1,5 @@
+expression SourceFile = "C:\Users\User\Downloads\Sample - Superstore.xlsx" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: a6029bab-75d7-4cbc-b1e8-1c27a522899d
+
+	annotation PBI_ResultType = Text
+

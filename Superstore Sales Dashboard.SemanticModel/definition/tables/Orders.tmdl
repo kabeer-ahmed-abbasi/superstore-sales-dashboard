@@ -1,0 +1,204 @@
+table Orders
+	lineageTag: 4f653720-40ed-4774-b287-f9a88e69ef10
+
+	/// Sum of sales value across all order lines.
+	measure 'Total Sales' = SUM ( Orders[Sales] )
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Key Measures
+		lineageTag: cda126d3-5410-458c-a31c-e5f7822b2a4b
+
+	/// Sum of profit across all order lines.
+	measure 'Total Profit' = SUM ( Orders[Profit] )
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Key Measures
+		lineageTag: 22af9eed-2b04-4f92-a671-f629925041da
+
+	/// Number of distinct orders.
+	measure 'Total Orders' = DISTINCTCOUNT ( Orders[Order ID] )
+		formatString: #,0
+		displayFolder: Key Measures
+		lineageTag: 527e7822-fa43-4495-b5fd-582ab9162f50
+
+	/// Total Profit as a share of Total Sales.
+	measure 'Profit Margin' = DIVIDE ( [Total Profit], [Total Sales] )
+		formatString: 0.00%
+		displayFolder: Key Measures
+		lineageTag: 20372ac6-4557-4ae2-9113-fb5b5bf08c0a
+
+	/// Units sold.
+	measure 'Total Quantity' = SUM ( Orders[Quantity] )
+		formatString: #,0
+		displayFolder: Key Measures
+		lineageTag: 6f69bdc9-d57f-4923-b150-dac74c8ed05b
+
+	/// Average discount rate across order lines.
+	measure 'Avg Discount' = AVERAGE ( Orders[Discount] )
+		formatString: 0.0%
+		displayFolder: Key Measures
+		lineageTag: 468a18f3-95e3-4ce2-8cdf-c1ca352aeab7
+
+	column 'Row ID'
+		dataType: int64
+		formatString: 0
+		lineageTag: 51734fab-9bd5-45c2-87fd-57bf2a798bb0
+		summarizeBy: none
+		sourceColumn: Row ID
+
+	column 'Order ID'
+		dataType: string
+		lineageTag: 79d069f5-f7b4-420e-b743-c46cad20e905
+		summarizeBy: none
+		sourceColumn: Order ID
+
+	column 'Order Date'
+		dataType: dateTime
+		formatString: dd mmm yyyy
+		lineageTag: 9182e900-5b5d-4a6f-b7f9-02ecb822b084
+		summarizeBy: none
+		sourceColumn: Order Date
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Ship Date'
+		dataType: dateTime
+		formatString: dd mmm yyyy
+		lineageTag: 37c98e7d-b2d1-4da5-80a8-28924fc23c98
+		summarizeBy: none
+		sourceColumn: Ship Date
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Ship Mode'
+		dataType: string
+		lineageTag: 69ca6c84-05ae-48b3-aeed-a2ef12224759
+		summarizeBy: none
+		sourceColumn: Ship Mode
+
+	column 'Customer ID'
+		dataType: string
+		lineageTag: 35fe5b37-a901-4734-8cd8-df502486c9a0
+		summarizeBy: none
+		sourceColumn: Customer ID
+
+	column 'Customer Name'
+		dataType: string
+		lineageTag: f88d5fa3-92b9-49b7-914f-6628002009bf
+		summarizeBy: none
+		sourceColumn: Customer Name
+
+	column Segment
+		dataType: string
+		lineageTag: 4660b824-f2fc-4e87-9042-2e88e12ab1c4
+		summarizeBy: none
+		sourceColumn: Segment
+
+	column Country
+		dataType: string
+		lineageTag: 95ee44d7-3750-4ff3-9088-51e2a85fdc42
+		dataCategory: Country
+		summarizeBy: none
+		sourceColumn: Country
+
+	column City
+		dataType: string
+		lineageTag: a9a65a9a-bb5a-4e3e-a4a7-fa357047cc7c
+		dataCategory: City
+		summarizeBy: none
+		sourceColumn: City
+
+	column State
+		dataType: string
+		lineageTag: ca2fba9b-438d-4293-ab5a-589591386ac5
+		dataCategory: StateOrProvince
+		summarizeBy: none
+		sourceColumn: State
+
+	column 'Postal Code'
+		dataType: string
+		lineageTag: 6d416403-03b7-4f8b-96fd-d6d6ec42a736
+		dataCategory: PostalCode
+		summarizeBy: none
+		sourceColumn: Postal Code
+
+	column Region
+		dataType: string
+		lineageTag: e56e089e-c20a-4c3d-84e2-fa3ea984bfe1
+		summarizeBy: none
+		sourceColumn: Region
+
+	column 'Product ID'
+		dataType: string
+		lineageTag: 147efde3-3709-4555-8876-1d2a9657ee83
+		summarizeBy: none
+		sourceColumn: Product ID
+
+	column Category
+		dataType: string
+		lineageTag: 9c4191c7-c6e8-42ab-bb44-da0889430305
+		summarizeBy: none
+		sourceColumn: Category
+
+	column Sub-Category
+		dataType: string
+		lineageTag: 9162f938-db0a-4e97-b48a-08b55a37e3b2
+		summarizeBy: none
+		sourceColumn: Sub-Category
+
+	column 'Product Name'
+		dataType: string
+		lineageTag: 7957afda-9d64-44bc-bf82-224a27bf9fe7
+		summarizeBy: none
+		sourceColumn: Product Name
+
+	column Sales
+		dataType: double
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 2ddfd534-2c64-4c39-b453-b8a25f62fc37
+		summarizeBy: sum
+		sourceColumn: Sales
+
+	column Quantity
+		dataType: int64
+		formatString: #,0
+		lineageTag: 884eed79-2875-4347-88b8-b9f8eacb1ae0
+		summarizeBy: sum
+		sourceColumn: Quantity
+
+	column Discount
+		dataType: double
+		formatString: 0%
+		lineageTag: c63f10be-3281-4322-95f3-936e4856741b
+		summarizeBy: none
+		sourceColumn: Discount
+
+	column Profit
+		dataType: double
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 4bfcbdcc-6543-4b26-a8e1-0cbbe72bcdc2
+		summarizeBy: sum
+		sourceColumn: Profit
+
+	partition Orders = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents(SourceFile), null, true),
+				    Sheet = Source{[Item = "in", Kind = "Sheet"]}[Data],
+				    Promoted = Table.PromoteHeaders(Sheet, [PromoteAllScalars = true]),
+				    // The workbook's date columns are inconsistent: cells Excel auto-converted
+				    // have day and month swapped, the rest are M/D/YYYY text. Repair both.
+				    FixDate = (v as any) as nullable date =>
+				        if v = null then null
+				        else if Value.Is(v, type datetime) or Value.Is(v, type date) then
+				            #date(Date.Year(v), Date.Day(v), Date.Month(v))
+				        else
+				            let p = Text.Split(Text.Trim(Text.From(v)), "/")
+				            in #date(Number.From(p{2}), Number.From(p{0}), Number.From(p{1})),
+				    Dates = Table.TransformColumns(Promoted, {{"Order Date", FixDate, type date}, {"Ship Date", FixDate, type date}}),
+				    PostalText = Table.TransformColumns(Dates, {{"Postal Code", each if _ = null then null else Text.PadStart(Text.From(_), 5, "0"), type text}}),
+				    Typed = Table.TransformColumnTypes(PostalText, {{"Row ID", Int64.Type}, {"Order ID", type text}, {"Ship Mode", type text}, {"Customer ID", type text}, {"Customer Name", type text}, {"Segment", type text}, {"Country", type text}, {"City", type text}, {"State", type text}, {"Postal Code", type text}, {"Region", type text}, {"Product ID", type text}, {"Category", type text}, {"Sub-Category", type text}, {"Product Name", type text}, {"Sales", type number}, {"Quantity", Int64.Type}, {"Discount", type number}, {"Profit", type number}}, "en-US")
+				in
+				    Typed
+
+	annotation PBI_ResultType = Table
+

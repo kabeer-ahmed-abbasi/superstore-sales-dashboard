@@ -13,7 +13,7 @@ Two-page interactive Power BI report on the Superstore retail dataset, tracking 
 - DAX measures: Total Sales, Total Profit, Total Orders, Profit Margin, Total Quantity, Avg Discount
 
 ## How to open
-1. Open `Superstore Sales Dashboard final..pbip` in Power BI Desktop (2024 or newer).
+1. Open `Superstore Sales Dashboard.pbip` in Power BI Desktop (2024 or newer).
 2. Home > Transform data > Edit parameters > set `SourceFile` to the full path of `Sample - Superstore.xlsx`, then Refresh.
 
 ## Tools

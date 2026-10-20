@@ -1,0 +1,69 @@
+table Calendar
+	lineageTag: e63b12ec-a75f-456e-8274-95f31b34c3a9
+	dataCategory: Time
+
+	column Date
+		dataType: dateTime
+		isKey
+		formatString: dd mmm yyyy
+		lineageTag: a89b3f50-2def-4363-adbb-03a54eba032c
+		summarizeBy: none
+		sourceColumn: Date
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Year
+		dataType: int64
+		formatString: 0
+		lineageTag: eeb98321-539f-4d3d-a07f-88ff75cb3efc
+		summarizeBy: none
+		sourceColumn: Year
+
+	column Quarter
+		dataType: string
+		lineageTag: 75576f6f-1a2a-4864-abf6-ee1651d82087
+		summarizeBy: none
+		sourceColumn: Quarter
+
+	column 'Month Number'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 832c9352-1a90-4d12-8335-e455548eadc2
+		summarizeBy: none
+		sourceColumn: Month Number
+
+	column Month
+		dataType: string
+		lineageTag: 81f27881-406e-4d1f-9ab9-f86762e9e9ab
+		summarizeBy: none
+		sourceColumn: Month
+		sortByColumn: 'Month Number'
+
+	column 'Month Start'
+		dataType: dateTime
+		formatString: mmm yyyy
+		lineageTag: 32b057ff-c83f-4baa-a21a-0d8dd3e7e21c
+		summarizeBy: none
+		sourceColumn: Month Start
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition Calendar = m
+		mode: import
+		source =
+				let
+				    StartDate = #date(2014, 1, 1),
+				    EndDate = #date(2017, 12, 31),
+				    Dates = List.Dates(StartDate, Duration.Days(EndDate - StartDate) + 1, #duration(1, 0, 0, 0)),
+				    AsTable = Table.FromList(Dates, Splitter.SplitByNothing(), type table [Date = date]),
+				    Year = Table.AddColumn(AsTable, "Year", each Date.Year([Date]), Int64.Type),
+				    Quarter = Table.AddColumn(Year, "Quarter", each "Q" & Text.From(Date.QuarterOfYear([Date])), type text),
+				    MonthNo = Table.AddColumn(Quarter, "Month Number", each Date.Month([Date]), Int64.Type),
+				    Month = Table.AddColumn(MonthNo, "Month", each Date.ToText([Date], "MMM", "en-GB"), type text),
+				    MonthStart = Table.AddColumn(Month, "Month Start", each Date.StartOfMonth([Date]), type date)
+				in
+				    MonthStart
+
+	annotation PBI_ResultType = Table
+

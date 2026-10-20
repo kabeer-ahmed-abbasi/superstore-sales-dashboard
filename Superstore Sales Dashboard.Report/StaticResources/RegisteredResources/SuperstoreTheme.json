@@ -1,0 +1,62 @@
+{
+  "name": "Superstore Blue",
+  "dataColors": [
+    "#1F6FD6",
+    "#0B3D91",
+    "#5AA3F0",
+    "#3E7CB1",
+    "#8CC4F7",
+    "#164E9E",
+    "#2C86E8",
+    "#6E9FD1",
+    "#A9CDF2",
+    "#0F5BBF"
+  ],
+  "foreground": "#1B2A3A",
+  "foregroundNeutralSecondary": "#4A5A6E",
+  "background": "#FFFFFF",
+  "backgroundLight": "#F4F8FC",
+  "backgroundNeutral": "#C9D3DF",
+  "tableAccent": "#1F6FD6",
+  "good": "#2E9E5B",
+  "bad": "#D64545",
+  "neutral": "#F2A541",
+  "textClasses": {
+    "title": {
+      "fontFace": "Segoe UI Semibold",
+      "fontSize": 13,
+      "color": "#1B2A3A"
+    },
+    "header": {
+      "fontFace": "Segoe UI Semibold",
+      "fontSize": 12,
+      "color": "#1B2A3A"
+    },
+    "label": {
+      "fontFace": "Segoe UI",
+      "fontSize": 10,
+      "color": "#1B2A3A"
+    },
+    "callout": {
+      "fontFace": "Segoe UI Semibold",
+      "fontSize": 28,
+      "color": "#1B2A3A"
+    }
+  },
+  "visualStyles": {
+    "*": {
+      "*": {
+        "visualHeader": [
+          {
+            "show": false
+          }
+        ],
+        "dropShadow": [
+          {
+            "show": false
+          }
+        ]
+      }
+    }
+  }
+}
